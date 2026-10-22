@@ -1,0 +1,16 @@
+{
+  "name": "security-news",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "国内外のセキュリティニュースを収集して分かりやすく表示するツール",
+  "scripts": {
+    "collect": "node scripts/collect.mjs",
+    "serve": "node scripts/serve.mjs",
+    "start": "node scripts/collect.mjs && node scripts/serve.mjs"
+  },
+  "engines": { "node": ">=20" },
+  "optionalDependencies": {
+    "@anthropic-ai/sdk": "*"
+  }
+}

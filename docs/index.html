@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>セキュリティニュース</title>
+  <meta name="description" content="国内外のセキュリティの出来事を自動収集し、分かりやすく整理して表示します">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <h1><span class="logo" aria-hidden="true">🛡️</span>セキュリティニュース</h1>
+      <div class="updated" id="updated">読み込み中…</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="digest" id="digest" aria-live="polite"></section>
+
+    <section class="controls" aria-label="絞り込み">
+      <div class="search">
+        <input id="q" type="search" placeholder="キーワードで検索（例: PHP、ランサム、CVE-2026）" autocomplete="off">
+      </div>
+      <div class="row">
+        <div class="seg" id="period" role="group" aria-label="期間">
+          <button data-v="1">24時間</button><button data-v="3">3日</button><button data-v="7">1週間</button><button data-v="30">30日</button>
+        </div>
+        <div class="seg" id="region" role="group" aria-label="地域">
+          <button data-v="all">すべて</button><button data-v="jp">国内</button><button data-v="global">海外</button>
+        </div>
+        <label class="toggle"><input type="checkbox" id="onlyHigh"> 要注意のみ</label>
+      </div>
+      <div class="chips" id="cats" role="group" aria-label="カテゴリ"></div>
+    </section>
+
+    <section id="list" class="list"></section>
+    <p class="empty" id="empty" hidden>条件に合うニュースはありません。</p>
+
+    <details class="glossary">
+      <summary>📖 用語ミニ解説</summary>
+      <dl>
+        <dt>脆弱性（ぜいじゃくせい）</dt><dd>ソフトや機器の「欠陥・弱点」。攻撃者に悪用されると乗っ取りや情報流出につながる。アップデートで直ることが多い。</dd>
+        <dt>CVE</dt><dd>脆弱性ごとに付く世界共通の番号（例: CVE-2026-12345）。同じ問題かどうかを見分けるのに使う。</dd>
+        <dt>ゼロデイ</dt><dd>修正プログラムが出る前に悪用が始まっている脆弱性。特に危険度が高い。</dd>
+        <dt>悪用確認（KEV）</dt><dd>米国CISAが「実際の攻撃で使われている」と確認した脆弱性の一覧。該当製品を使っていれば最優先で更新を。</dd>
+        <dt>ランサムウェア</dt><dd>データを暗号化して使えなくし、元に戻す代わりに身代金を要求するマルウェア。最近はデータを盗んで「公開する」と脅す二重恐喝が主流。</dd>
+        <dt>フィッシング</dt><dd>本物そっくりの偽メール・偽サイトでIDやパスワード、カード情報を盗む手口。SMSを使うものはスミッシング。</dd>
+        <dt>不正アクセス</dt><dd>権限のない人がシステムに侵入すること。盗まれたパスワードの使い回しが原因になりやすい。</dd>
+        <dt>サプライチェーン攻撃</dt><dd>本命の組織ではなく、取引先・委託先・使っているソフトなど「つながり」の弱い所から侵入する攻撃。</dd>
+        <dt>DDoS攻撃</dt><dd>大量の通信を送りつけてサービスを止める攻撃。</dd>
+        <dt>テイクダウン</dt><dd>警察や企業が協力して、攻撃に使われるサーバーや犯罪サイトを停止・押収すること。「良いニュース」側の出来事。</dd>
+      </dl>
+    </details>
+
+    <footer class="foot">
+      <p>各記事の著作権は配信元に帰属します。見出しと概要のみを表示し、詳細は元記事へリンクしています。</p>
+      <p id="sources"></p>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

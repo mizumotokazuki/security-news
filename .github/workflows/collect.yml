@@ -1,0 +1,58 @@
+name: ニュース収集と公開
+
+on:
+  schedule:
+    - cron: "0 */3 * * *" # 3時間ごと（UTC）
+  workflow_dispatch: {}    # GitHub の画面から手動実行もできる
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm ci --omit=dev || npm install --omit=dev
+
+      - name: ニュースを収集
+        env:
+          # Settings > Secrets and variables > Actions に登録すると AI 要約が有効になる（未登録でも動作します）
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/collect.mjs
+
+      - name: 収集データをコミット
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data
+          git diff --cached --quiet || git commit -m "ニュース更新 $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    needs: collect
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

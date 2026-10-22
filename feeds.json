@@ -1,0 +1,18 @@
+{
+  "_comment": "収集元の一覧。region: jp=国内 / global=海外。enabled を false にすると収集を止められます。",
+  "feeds": [
+    { "id": "jpcert",     "name": "JPCERT/CC",          "url": "https://www.jpcert.or.jp/rss/jpcert.rdf",            "region": "jp",     "enabled": true },
+    { "id": "jvn",        "name": "JVN 脆弱性レポート",   "url": "https://jvn.jp/rss/jvn.rdf",                         "region": "jp",     "enabled": true },
+    { "id": "ipa",        "name": "IPA 重要なセキュリティ情報", "url": "https://www.ipa.go.jp/security/alert-rss.rdf",   "region": "jp",     "enabled": true },
+    { "id": "secnext",    "name": "Security NEXT",       "url": "https://www.security-next.com/feed",                 "region": "jp",     "enabled": true },
+    { "id": "scannet",    "name": "ScanNetSecurity",     "url": "https://scan.netsecurity.ne.jp/rss/index.rdf",       "region": "jp",     "enabled": true },
+    { "id": "piyolog",    "name": "piyolog",             "url": "https://piyolog.hatenadiary.jp/rss",                 "region": "jp",     "enabled": true },
+    { "id": "itmedia",    "name": "ITmedia セキュリティ", "url": "https://rss.itmedia.co.jp/rss/2.0/news_security.xml", "region": "jp",     "enabled": true },
+    { "id": "thn",        "name": "The Hacker News",     "url": "https://feeds.feedburner.com/TheHackersNews",        "region": "global", "enabled": true },
+    { "id": "bleeping",   "name": "BleepingComputer",    "url": "https://www.bleepingcomputer.com/feed/",             "region": "global", "enabled": true },
+    { "id": "krebs",      "name": "Krebs on Security",   "url": "https://krebsonsecurity.com/feed/",                  "region": "global", "enabled": true },
+    { "id": "securityweek","name": "SecurityWeek",       "url": "https://www.securityweek.com/feed/",                 "region": "global", "enabled": true },
+    { "id": "darkreading","name": "Dark Reading",        "url": "https://www.darkreading.com/rss.xml",                "region": "global", "enabled": true },
+    { "id": "cisa-kev",   "name": "CISA KEV（悪用確認済み脆弱性）", "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json", "region": "global", "type": "kev", "enabled": true }
+  ]
+}
